@@ -1,0 +1,18 @@
+Date: 30 Apr,2019
+Flat: Shaon [Ground Floor]
+
+Present Reading         = 8037.00 Unit
+Past Reading            = 7897.00 Unit
+_______________________________________
+Total Electricity Usage =  140.00 Unit
+
+Split 1 - 75.00 x  4.00 = 300.00 BDT
+Split 2 - 65.00 x  5.45 = 354.25 BDT
+_____________________________________
+Total Electricity Bill =  654.25 BDT
+5% Vat                 =   32.71 BDT
+Service Charge         =   60.00 BDT
+Demand Charge          =   15.00 BDT
+Gas Bill               =  800.00 BDT
+_____________________________________
+Total Payable          = 1,561.96 BDT

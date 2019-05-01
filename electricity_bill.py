@@ -1,3 +1,6 @@
+import os, sys
+import win32print
+
 import configparser
 import codecs
 import datetime
@@ -7,6 +10,11 @@ def read_config_ini(filename):
     config = configparser.ConfigParser()
     config.readfp(codecs.open(filename, "r", "utf8"))
     return config
+
+def write_file(filename, strs,mode="w"):
+	import codecs
+	with codecs.open(filename, mode, encoding='utf-8') as file_appender:
+		file_appender.writelines(strs)
 
 def comma_seperator_number(number):
 	number = float(number)
@@ -32,6 +40,7 @@ def comma_seperator_number(number):
 
 
 today = datetime.date.today()
+
 last_date_of_prev_month = datetime.date(today.year, today.month, 1) - relativedelta(days=1)
 date_ = last_date_of_prev_month.strftime('%d %b,%Y')
 
@@ -94,3 +103,26 @@ _____________________________________
 {'Total Payable':<22} = {total_payable:7,.2f} BDT
 """
 print(electricity_string)
+
+#windows string newline
+electricity_string = electricity_string.replace('\n','\r\n')
+filename = date_+".txt"
+write_file(filename, electricity_string,mode="w")
+
+
+printer_name = "Canon LBP6030/6040/6018L"
+import win32ui
+# X from the left margin, Y from top margin
+# both in pixels
+X=50; Y=50
+input_string = electricity_string
+multi_line_string = input_string.split()
+hDC = win32ui.CreateDC ()
+hDC.CreatePrinterDC (printer_name)
+hDC.StartDoc ("Electricity Bill Print")
+hDC.StartPage ()
+for line in multi_line_string:
+     hDC.TextOut(X,Y,line)
+     Y += 100
+hDC.EndPage ()
+hDC.EndDoc ()

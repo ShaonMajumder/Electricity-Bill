@@ -11,49 +11,6 @@ def print_file(filename):
 	win32print.SetDefaultPrinter(printer_name)
 	os.startfile(filename, "print")
 
-def print_file3(str1):
-	import win32ui
-	import win32print
-	import win32con
-	#str1 = str1 + str1 + str1 + str1  # test height of text area
-	hDC = win32ui.CreateDC()
-
-	printer_name = "Canon LBP6030/6040/6018L"
-	win32print.SetDefaultPrinter(printer_name)
-
-	hDC.CreatePrinterDC(win32print.GetDefaultPrinter())
-	hDC.StartDoc("Test doc")
-	hDC.StartPage()
-	hDC.SetMapMode(win32con.MM_TWIPS)
-	# draws text within a box (assume about 1400 dots per inch for typical HP printer)
-	ulc_x = 1000    # give a left margin
-	ulc_y = -1000   # give a top margin
-	lrc_x = 11500   # width of text area-margin, close to right edge of page
-	lrc_y = -15000  # height of text area-margin, close to bottom of the page
-	hDC.DrawText(str1, (ulc_x, ulc_y, lrc_x, lrc_y), win32con.DT_LEFT)
-	hDC.EndPage()
-	hDC.EndDoc()
-def print_file2(filename):
-	lines = read_file(filename)
-
-	printer_name = "Canon LBP6030/6040/6018L"
-	win32print.SetDefaultPrinter(printer_name)
-	import win32ui
-	# X from the left margin, Y from top margin
-	# both in pixels
-	X=50; Y=50
-	
-	hDC = win32ui.CreateDC ()
-	hDC.CreatePrinterDC (printer_name)
-	hDC.StartDoc ("Electricity Bill Print")
-	hDC.StartPage ()
-	for line in lines:
-		print(line)
-		hDC.TextOut(X,Y,line)
-		Y += 100
-		
-	hDC.EndPage ()
-	hDC.EndDoc ()
 
 def read_config_ini(filename):
     config = configparser.ConfigParser()

@@ -6,6 +6,7 @@ import codecs
 import datetime
 from dateutil.relativedelta import relativedelta
 
+
 def print_file(filename):
 	printer_name = "Canon LBP6030/6040/6018L"
 	win32print.SetDefaultPrinter(printer_name)
@@ -61,7 +62,12 @@ def comma_seperator_number(number):
 
 today = datetime.date.today()
 
-last_date_of_prev_month = datetime.date(today.year, today.month, 1) - relativedelta(days=1)
+def last_day_of_month(any_day):
+    next_month = any_day.replace(day=28) + datetime.timedelta(days=4)  # this will never fail
+    return next_month - datetime.timedelta(days=next_month.day)
+
+#last_date_of_prev_month = datetime.date(today.year, today.month, 1) - relativedelta(days=1)
+last_date_of_prev_month = last_day_of_month(today)
 date_ = last_date_of_prev_month.strftime('%d %b,%Y')
 
 config = read_config_ini("config.ini")
@@ -128,4 +134,4 @@ _____________________________________
 filename = date_+".txt"
 
 write_file(filename, electricity_string,mode="w")
-print_file2(filename)
+print_file(filename)
